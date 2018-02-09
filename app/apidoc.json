@@ -1,0 +1,13 @@
+{
+  "name": "너로 정했다 api",
+  "version": "0.1.0",
+  "description": "숭실대학교 소프트웨어학부 17학번 장원준,손용락,권혁진,박해영,최준식 개발.",
+  "title": "Custom apiDoc browser title",
+  "url" : "https://localhost:3000/api/v1g1",
+  "order": [
+    "user",
+    "quest",
+    "senior"
+  ]
+}
+
