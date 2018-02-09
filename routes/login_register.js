@@ -124,7 +124,7 @@ const config = require('../config/config');
     });
 
     router.get('/users_test/:id', (req, res) => {
-        var email = req.params.id;
+        var id = req.params.id;
         // if (checkToken(req)) {
         db.connectDB().then(
             profile.GetProfile(id)
