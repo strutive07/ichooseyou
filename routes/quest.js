@@ -55,6 +55,7 @@ router.post('/create', (req, res) => {
                         }else{
                             quest_num = req.params.quest_id % 10 * 2 + 1;
                         }
+                        console.log(quest_num + ' : ' + req.params.quest_id);
                         quest_status = result.quest_bool[quest_num];
                         return quest_info.get_one_quest(req.params.quest_id);
                     }).then(result => {
