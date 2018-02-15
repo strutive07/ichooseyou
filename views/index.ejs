@@ -3,18 +3,7 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script>
-        function page_move(url) {
-            var form = document.createElement("form");
 
-            form.action = url;
-            form.method = "get";
-
-            form.setHeader('x-access-token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGF0dXMiOjIwMCwibWVzc2FnZSI6IjIwMTcwMzIzIiwiaWF0IjoxNTE3NTc2Nzk2LCJleHAiOjE1MTc1NzgyMzZ9.cmde5tzOQZgCuPqnbzrJEIMqhyuFXMBeOoIVt2CPhns');
-            console.log('form : ' + form);
-            form.submit();
-        }
-    </script>
   </head>
   <body>
     <h1><%= title %></h1>
@@ -22,4 +11,6 @@
     <a href="#" onclick="javascript:page_move('http://localhost:3000/api/v1g1/users/20170323');">click</a>
 
   </body>
+
+
 </html>

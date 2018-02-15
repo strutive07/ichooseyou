@@ -49,7 +49,12 @@ router.post('/create', (req, res) => {
                 user_quest_bool.get_one_quest_bool(req.params.id)
                     .then(result => {
                         console.log('result : ' + result);
-                        var quest_num = Math.floor(req.params.quest_id/10) + req.params.quest_id % 10;
+                        var quest_num = 0;
+                        if(req.params.quest_id % 2){
+                            quest_num = req.params.quest_id % 10 * 2;
+                        }else{
+                            quest_num = req.params.quest_id % 10 * 2 + 1;
+                        }
                         quest_status = result.quest_bool[quest_num];
                         return quest_info.get_one_quest(req.params.quest_id);
                     }).then(result => {
