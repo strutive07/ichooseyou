@@ -44,19 +44,13 @@ router.post('/create', (req, res) => {
     router.get('/:id/:quest_id', (req, res) => {
         if (checkToken(req)) {
             var quest_status = -1;
-            var quest_id_int = parseInt(req.params.quest_id);
             var tmp_quest_info;
             db.connectDB().then(
                 user_quest_bool.get_one_quest_bool(req.params.id)
                     .then(result => {
                         console.log('result : ' + result);
-                        var quest_num = 0;
-                        if(quest_id_int % 2 === 1){
-                            Math.floor(quest_id_int / 10) * 2;
-                        }else{
-                            Math.floor(quest_id_int / 10) * 2 + 1;
-                        }
-                        console.log(quest_num + ' : ' + quest_id_int);
+                        var quest_num = Math.floor(req.params.quest_id/10) * 2 + req.params.quest_id % 10 - 1;
+                        console.log(quest_num + ' : ' + req.params.quest_id);
                         quest_status = result.quest_bool[quest_num];
                         return quest_info.get_one_quest(req.params.quest_id);
                     }).then(result => {

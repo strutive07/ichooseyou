@@ -58,7 +58,7 @@ exports.set_one_quest_bool_in_progress = (id, quest_id) =>
     new Promise((resolve, reject) => {
         user_quest_bool.find({auth_id : id}).then(results => {
                 var user_quest_table = results[0];
-                var quest_num = Math.floor(quest_id/10) + quest_id % 10;
+                var quest_num = Math.floor(quest_id/10) *2 + quest_id % 10 -1;
                 user_quest_table.quest_bool[quest_num] = 0;
                 return user_quest_table.save();
         }).then( user_quest_table =>
@@ -73,7 +73,7 @@ exports.set_one_quest_bool_finish = (id, quest_id) =>
         var g_user_quest_table;
         user_quest_bool.find({auth_id : id}).then(results => {
             var user_quest_table = results[0];
-            var quest_num = Math.floor(quest_id/10) + quest_id % 10;
+            var quest_num = Math.floor(quest_id/10) *2 + quest_id % 10 -1
             user_quest_table.quest_bool[quest_num] = 1;
             return user_quest_table.save();
         }).then( user_quest_table => {
