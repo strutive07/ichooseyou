@@ -63,6 +63,7 @@ const config = require('../config/config');
             db.connectDB().then(
                 elder_user_quest_accept_list.get_one_quest_list(req.params.id)
                     .then(result =>{
+                        console.log(result);
                         res.status(result.status).json({message: result.message, result : result.result});
                     })
                     .catch(err => {
