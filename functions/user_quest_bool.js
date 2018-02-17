@@ -56,11 +56,19 @@ exports.get_one_quest_bool = id =>
 
 exports.set_one_quest_bool_in_progress = (id, quest_id) =>
     new Promise((resolve, reject) => {
+
         user_quest_bool.find({auth_id : id}).then(results => {
-                var user_quest_table = results[0];
+                var user_quest_table_ho = results[0];
                 var quest_num = Math.floor(quest_id/10) *2 + quest_id % 10 -1;
-                user_quest_table.quest_bool[quest_num] = 0;
-                return user_quest_table.save();
+                console.log(quest_num);
+                results[0].quest_bool[quest_num] = 0;
+                user_quest_bool.update({auth_id : id}, {$set : {quest_bool : results[0].quest_bool}}, function(err, output){
+                    if(err){
+                        console.log(err);
+                    }
+                    console.log(output);
+                });
+                return results[0];
         }).then( user_quest_table =>
             resolve({ status: 200, message: '정상적으로 진행중으로 변경되었습니다.' , user_quest_table : user_quest_table})
         ).catch(err => {
@@ -73,9 +81,16 @@ exports.set_one_quest_bool_finish = (id, quest_id) =>
         var g_user_quest_table;
         user_quest_bool.find({auth_id : id}).then(results => {
             var user_quest_table = results[0];
-            var quest_num = Math.floor(quest_id/10) *2 + quest_id % 10 -1
-            user_quest_table.quest_bool[quest_num] = 1;
-            return user_quest_table.save();
+            var quest_num = Math.floor(quest_id/10) *2 + quest_id % 10 -1;
+            results[0].quest_bool[quest_num] = 1;
+            user_quest_bool.update({auth_id : id}, {$set : {quest_bool : results[0].quest_bool}}, function(err, output){
+                if(err){
+                    console.log(err);
+                }
+                console.log(output);
+            });
+            return results[0];
+
         }).then( user_quest_table => {
             var tmp_first_quest_id = Math.floor(quest_id/10) + 1;
             var tmp_second_quest_id = Math.floor(quest_id/10) + 2;
