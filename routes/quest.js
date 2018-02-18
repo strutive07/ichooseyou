@@ -88,11 +88,12 @@ router.post('/create', (req, res) => {
     });
 
 
-    router.post('/push/:id/:older_id/:difficulty', (req, res) => {
+    router.post('/push/:id/:older_id/:quest_id', (req, res) => {
         if (checkToken(req)) {
+            var junior_json;
             db.connectDB().then(profile.GetProfile(req.params.id)
                 .then(result =>{
-                    var junior_json = {name : result.name, phone_number : result.phone_number, difficulty : req.params.difficulty};
+                    junior_json = {name : result.name, phone_number : result.phone_number, difficulty : (req.params.quest_id)%10, quest_id : req.params.quest_id ,id : req.params.id};
                     return elder_user_quest_accept_list.push_one_quest_list_in_progress(req.params.older_id, junior_json)
                 })
                 .then( result =>
