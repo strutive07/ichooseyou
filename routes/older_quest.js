@@ -33,7 +33,7 @@ const config = require('../config/config');
     });
 
     router.get('/complete/:id/:older_id/:quest_id/:random_string', (req, res) => {
-        if (checkToken(req)) {
+        // if (checkToken(req)) {
             db.connectDB().then(
                 quest_complete_flow.complete_quest_finish(req.params.id, req.params.older_id, req.params.quest_id, req.params.random_string)
                     .then(result => {
@@ -52,9 +52,9 @@ const config = require('../config/config');
                         res.status(err.status).json({message: err.message});
                     })
             );
-        } else {
-            res.status(401).json({message: 'Invalid Token! '});
-        }
+        // } else {
+        //     res.status(401).json({message: 'Invalid Token! '});
+        // }
     });
 
     router.get('/:id', (req, res) => {
