@@ -108,20 +108,20 @@ router.post('/create', (req, res) => {
         }
     });
 
-    router.post('/delete/:id/:index', (req, res) => {
-        if (checkToken(req)) {
-            db.connectDB().then(elder_user_quest_accept_list.delete_one_quest_list_by_index(req.params.id, req.params.index)
-                .then( result =>
-                    res.status(result.status).json({message: result.message, result : result.elder_user_accept_list})
-                )
-                .catch(err => {
-                    res.status(err.status).json({message: err.message});
-                })
-            );
-        } else {
-            res.status(401).json({message: 'Invalid Token! '});
-        }
-    });
+    // router.post('/delete/:id/:index', (req, res) => {
+    //     if (checkToken(req)) {
+    //         db.connectDB().then(elder_user_quest_accept_list.delete_one_quest_list_by_index(req.params.id, req.params.index)
+    //             .then( result =>
+    //                 res.status(result.status).json({message: result.message, result : result.elder_user_accept_list})
+    //             )
+    //             .catch(err => {
+    //                 res.status(err.status).json({message: err.message});
+    //             })
+    //         );
+    //     } else {
+    //         res.status(401).json({message: 'Invalid Token! '});
+    //     }
+    // });
 
 
 

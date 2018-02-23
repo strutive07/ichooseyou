@@ -34,10 +34,15 @@ const config = require('../config/config');
 
     router.get('/complete/:id/:older_id/:quest_id/:random_string', (req, res) => {
         // if (checkToken(req)) {
+        console.log('ho?');
             db.connectDB().then(
                 quest_complete_flow.complete_quest_finish(req.params.id, req.params.older_id, req.params.quest_id, req.params.random_string)
+
                     .then(result => {
                         profile.add_score(req.params.id, 1000)
+                    })
+                    .then(result => {
+                        elder_user_quest_accept_list.delete_one_quest_list_by_index(req.params.older_id, req.params.id, req.params.quest_id);
                     })
                     .then(result => {
                         profile.add_score(req.params.older_id, -1)

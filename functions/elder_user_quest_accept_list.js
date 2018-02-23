@@ -67,11 +67,18 @@ exports.push_one_quest_list_in_progress = (id, junior_json) =>
             reject({ status: 500, message: 'Internal Server Error !' })
         })});
 
-exports.delete_one_quest_list_by_index = (id, index) =>
+exports.delete_one_quest_list_by_index = (id, junior_id ,quest_id) =>
     new Promise((resolve, reject) => {
         elder_user_quest_accept_list.find({auth_id : id}).then(results => {
             var elder_user_accept_list = results[0];
-            elder_user_accept_list.accept_user_list.slice(index, 1);
+            for(var i=0; i<elder_user_accept_list.accept_user_list.length; i++){
+                if(elder_user_accept_list.accept_user_list[i].id == junior_id && elder_user_accept_list.accept_user_list[i].quest_id == quest_id){
+                    elder_user_accept_list.accept_user_list.splice(i, 1);
+                    console.log(elder_user_accept_list.accept_user_list);
+                    break;
+                }
+            }
+            console.log(elder_user_accept_list.accept_user_list);
             return elder_user_accept_list.save();
         }).then( elder_user_accept_list =>
             resolve({ status: 200, message: '정상적으로 완료로 변경되었습니다.' , user_quest_table : elder_user_accept_list })
