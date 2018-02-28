@@ -39,6 +39,11 @@ const config = require('../config/config');
         }
     });
 
+router.get('/authenticate', (req, res) => {
+    res.redirect('/');
+});
+
+
     router.post('/register', (req, res) => {
         const name = req.body.name;
         var id = req.body.id;

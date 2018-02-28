@@ -61,3 +61,24 @@ exports.get_one_quest = id =>
             console.log("err : " + err);
             reject({ status: 500, message: 'Internal Server Error !' })
         })});
+
+exports.people_num_change = (quest_id, dn) =>
+    new Promise((resolve, reject) => {
+        quest_info.find({quest_id : quest_id}).then(results => {
+            var re_quest_info = results[0];
+            var people_num = results[0].people_num;
+            people_num = people_num + dn;
+            quest_info.update({quest_id : quest_id}, {$set : {people_num : people_num}}, function(err, output){
+                if(err){
+                    console.log(err);
+                }
+                console.log('output : ' + JSON.stringify(output));
+            });
+            return results[0];
+        }).then( results =>
+            resolve({ status: 200, message: 1})
+        ).catch(err => {
+            console.log("err : " + err);
+            reject({ status: 500, message: 'Internal Server Error !' })
+        })});
+

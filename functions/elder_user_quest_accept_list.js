@@ -6,6 +6,7 @@
 //     quest_bool : Array
 
 const elder_user_quest_accept_list = require('../models/elder_user_quest_accept_list');
+const user_quest_bool = require('../models/user_quest_bool');
 const bcrypt = require('bcryptjs');
 
 exports.register_user_quest_bool = (auth_id) =>

@@ -9,6 +9,7 @@ const user_quest_bool = require('../functions/user_quest_bool');
 const elder_user_quest_accept_list= require('../functions/elder_user_quest_accept_list');
 const profile = require('../functions/profile');
 const quest_complete_flow = require('../functions/quest_complete_flow');
+const quest_info = require('../functions/quest_info');
 const password = require('../functions/password');
 const db = require('../util/db');
 const config = require('../config/config');
@@ -40,6 +41,10 @@ const config = require('../config/config');
 
                     .then(result => {
                         profile.add_score(req.params.id, 1000)
+                    })
+                    .then(result => {
+                        console.log('ho?');
+                        quest_info.people_num_change(req.params.quest_id, -1);
                     })
                     .then(result => {
                         elder_user_quest_accept_list.delete_one_quest_list_by_index(req.params.older_id, req.params.id, req.params.quest_id);
@@ -79,6 +84,9 @@ const config = require('../config/config');
             res.status(401).json({message: 'Invalid Token! '});
         }
     });
+
+
+
 
 
 

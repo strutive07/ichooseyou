@@ -9,7 +9,8 @@ const quest_info = mongoose.Schema({
     purpose : String,
     location : String,
     difficulty : Number, //0 쉬움 1 어려움
-    reward : String
+    reward : String,
+    people_num : Number
 
 
     //title, context, purpose, location, difficulty, reward

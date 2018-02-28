@@ -74,7 +74,21 @@ router.post('/create', (req, res) => {
     router.post('/start/:id/:quest_id', (req, res) => {
         if (checkToken(req)) {
             db.connectDB().then(
-                user_quest_bool.set_one_quest_bool_in_progress(req.params.id, req.params.quest_id)
+                quest_info.get_one_quest(req.params.quest_id)
+                    .then(result => {
+                        if(result.people_num >= 4){
+                            res.status(501).json({message: '인원 초과', result : -1});
+                        }else{
+                            return quest_info.people_num_change(req.params.quest_id, 1);
+                        }
+                    })
+                    .then(result => {
+                        if(result.message === 1){
+                            return user_quest_bool.set_one_quest_bool_in_progress(req.params.id, req.params.quest_id);
+                        }else{
+                            res.status(401).json({message: 'Invalid Token! '});
+                        }
+                    })
                     .then(result => {
                         res.status(result.status).json({message: result.message, user_quest_table : result.user_quest_table});
                     })
