@@ -148,18 +148,24 @@ router.get('/authenticate', (req, res) => {
         if (checkToken(req)) {
             const oldPassword = req.body.password;
             const new_password = req.body.new_password;
+            const new_password_confirm = req.body.new_password_confirm;
+            const phone_number = req.body.phone_number;
 
-            if (!oldPassword || !new_password || !oldPassword.trim() || !new_password.trim()) {
-                res.status(400).json({message: 'Invalid Token! '});
+            if (!oldPassword || !new_password || !phone_number || !new_password_confirm || !oldPassword.trim() || !new_password.trim() || !phone_number.trim() || !new_password_confirm.trim()) {
+                res.status(400).json({message: '필수 입력 요소가 비어있습니다.'});
             } else {
-                db.connectDB().then( password.ChangePassword(req.params.id, oldPassword, new_password)
-                    .then(result => {
-                        res.status(result.status).json({message: result.message});
-                    })
-                    .catch(err => {
-                        res.status(err.status).json({message: err.message});
-                    })
-                );
+                if(new_password === new_password_confirm){
+                    db.connectDB().then( password.ChangePassword(req.params.id, oldPassword, new_password, phone_number)
+                        .then(result => {
+                            res.status(result.status).json({message: result.message});
+                        })
+                        .catch(err => {
+                            res.status(err.status).json({message: err.message});
+                        })
+                    );
+                }else{
+                    res.status(402).json({message: '새로운 비밀번호의 입력값 2개가 일치하지 않습니다.'});
+                }
             }
         } else {
             res.status(401).json({message: 'Invalid Token! '});

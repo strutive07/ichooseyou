@@ -6,29 +6,28 @@ const nodemailer = require('nodemailer');
 const randomstring = require('randomstring');
 // const config = require('../config/config');
 
-exports.ChangePassword = (id, password, new_password) =>
+exports.ChangePassword = (id, password, new_password, phone_number) =>
     new Promise((resolve, reject) => {
         user.find({auth_id : id})
             .then(results =>{
-            let user = results[0];
-            console.log('id -> ' + id);
-            console.log('password -> ' + password);
-            console.log('new_password -> ' + new_password);
-            console.log('user -> ' + user);
+            var user = results[0];
 
             if(bcrypt.compareSync(password, user.hashed_password)){
                 const salt = bcrypt.genSaltSync(10);
                 console.log('salt -> ' + salt);
                 console.log('new_password -> ' + new_password);
                 const hash = bcrypt.hashSync(new_password, salt);
+                user.first_login = true;
                 user.hashed_password = hash;
+                user.phone_number = phone_number;
                 return user.save();
             }else{
                 reject({ status: 401, message: 'Invalid Old Password !' });
             }
-        })
-            .then(user => resolve({ status: 200, message: 'Password Updated Sucessfully !' })
-            .catch(err => reject({ status: 500, message: 'Internal Server Error !' })));
+        }).then(user => resolve({ status: 200, message: 'Password Updated Sucessfully !'
+        }).catch(err => reject({
+            status: 500, message: 'Internal Server Error !'
+        })));
     });
 
 exports.ResetPasswordInit = (email, id) =>
