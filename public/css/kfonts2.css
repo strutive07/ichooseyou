@@ -1,0 +1,9 @@
+@font-face{
+  font-family:'NanumBarunGothic';
+  src:url("../fonts/NanumBarunGothic.eot");
+  src:local("☺"),url("../fonts/NanumBarunGothic.woff") format("woff");
+}
+
+body {font-family: "맑은 고딕","Malgun Gothic",  sans-serif; }
+
+h1, h2, h3, h4, h5 { font-family: "Helvetica Neue", Helvetica, Arial,"NanumBarunGothic",  sans-serif; }

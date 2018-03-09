@@ -59,7 +59,8 @@ const config = require('../config/config');
                         res.status(result.status).json({message: result.message, user_quest_table : result.user_quest_table});
                     })
                     .catch(err => {
-                        res.status(err.status).json({message: err.message});
+                        var __dirname = '../public/complete.html'
+                        res.sendFile(__dirname);
                     })
             );
         // } else {

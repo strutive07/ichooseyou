@@ -1,0 +1,7 @@
+@font-face{
+  font-family:'NanumGothic';
+  src:url("../fonts/NanumGothic.eot");
+  src:local("☺"),url("../fonts/NanumGothic.woff") format("woff");
+}
+
+body { font-family: "Helvetica Neue", Helvetica, Arial,"NanumGothic",  sans-serif; }
