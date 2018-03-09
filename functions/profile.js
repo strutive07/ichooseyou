@@ -21,7 +21,7 @@ exports.get_ranking = id =>
                       }
                }
                var top_ranking = [results[0], results[1], results[2]];
-               resolve({top_ranking : top_ranking, my_ranking : i+1});
+               resolve({top_ranking : top_ranking, my_ranking : i+1, my_ranking_info : results[i]});
         }).catch(err => {
             console.log("err : " + err);
             reject({ status: 500, message: 'Internal Server Error !' })
