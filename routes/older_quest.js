@@ -56,8 +56,7 @@ const config = require('../config/config');
                         return user_quest_bool.set_one_quest_bool_finish(req.params.id, req.params.quest_id)
                     })
                     .then(result =>{
-                        var __dirname = '../public/complete.html'
-                        res.sendFile(__dirname);
+                        res.redirect('http://ssumon.com/complete');
                     })
                     .catch(err => {
                         res.status(err.status).json({message: err.message});
