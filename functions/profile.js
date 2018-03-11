@@ -27,6 +27,23 @@ exports.get_ranking = id =>
             reject({ status: 500, message: 'Internal Server Error !' })
         })});
 
+exports.get_older_ranking = id =>
+    new Promise((resolve, reject) => {
+        user.find().sort({score : 1}).then(results => {
+            var i=0;
+            for(i = 0; i<results.length; i++){
+                if(results[i].auth_id == id){
+                    break;
+                }
+            }
+            var top_ranking = [results[0], results[1], results[2]];
+            resolve({top_ranking : top_ranking, my_ranking : i+1, my_ranking_info : results[i]});
+        }).catch(err => {
+            console.log("err : " + err);
+            reject({ status: 500, message: 'Internal Server Error !' })
+        })});
+
+
 exports.add_score = (id, add_score) =>
     new Promise((resolve, reject) => {
         user.find({auth_id : id}).then(results => {

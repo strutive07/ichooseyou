@@ -244,6 +244,24 @@ router.get('/authenticate', (req, res) => {
         }
     });
 
+    router.get('/older_ranking/:id', (req, res) => {
+        console.log('ranking id : '+ req.params.id);
+        if (checkToken(req)) {
+            db.connectDB().then(
+                profile.get_older_ranking(req.params.id)
+                    .then(result =>
+                        res.status(200).json({top_ranking : result.top_ranking, my_ranking : result.my_ranking, my_ranking_info : result.my_ranking_info})
+                    ).catch(err => {console.log('err : ' + err);
+                    res.status(err.status).json({message: err.message});
+                })
+            );
+        } else {
+            res.status(401).json({message: 'Invalid Token! '});
+        }
+    });
+
+
+
     //========================================================================================================================
 
 
