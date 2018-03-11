@@ -59,7 +59,7 @@ const config = require('../config/config');
                         res.redirect('http://ssumon.com/complete');
                     })
                     .catch(err => {
-                        res.status(err.status).json({message: err.message});
+                        res.redirect('http://ssumon.com/timeout');
                     })
             );
         // } else {
