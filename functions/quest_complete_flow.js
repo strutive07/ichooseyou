@@ -64,7 +64,7 @@ exports.complete_quest_finish = (id, elder_id, quest_id, temp_random_string) =>
             let user = results[0];
             const time_gap = new Date() - new Date(user.temp_temp_random_string_time);
             const seconds = Math.floor(time_gap/1000);
-            if(seconds <= 120){
+            if(seconds <= 359){
                 console.log('temp_random_string : ' + temp_random_string );
                 return user;
             }else{
