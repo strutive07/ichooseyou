@@ -50,7 +50,7 @@ exports.get_one_quest_bool = id =>
         user_quest_bool.find({auth_id : id}).then(results =>
             resolve(results[0])
         ).catch(err => {
-            console.log("err : " + err);
+            //console.log("err : " + err);
             reject({ status: 500, message: 'Internal Server Error !' })
         })});
 
@@ -60,19 +60,19 @@ exports.set_one_quest_bool_in_progress = (id, quest_id) =>
         user_quest_bool.find({auth_id : id}).then(results => {
                 var user_quest_table_ho = results[0];
                 var quest_num = Math.floor(quest_id/10) *2 + quest_id % 10 -1;
-                console.log(quest_num);
+                //console.log(quest_num);
                 results[0].quest_bool[quest_num] = 0;
                 user_quest_bool.update({auth_id : id}, {$set : {quest_bool : results[0].quest_bool}}, function(err, output){
                     if(err){
-                        console.log(err);
+                        //console.log(err);
                     }
-                    console.log(output);
+                    //console.log(output);
                 });
                 return results[0];
         }).then( user_quest_table =>
             resolve({ status: 200, message: '정상적으로 진행중으로 변경되었습니다.' , user_quest_table : user_quest_table})
         ).catch(err => {
-            console.log("err : " + err);
+            //console.log("err : " + err);
             reject({ status: 500, message: 'Internal Server Error !' })
         })});
 
@@ -85,9 +85,9 @@ exports.set_one_quest_bool_finish = (id, quest_id) =>
             results[0].quest_bool[quest_num] = 1;
             user_quest_bool.update({auth_id : id}, {$set : {quest_bool : results[0].quest_bool}}, function(err, output){
                 if(err){
-                    console.log(err);
+                    //console.log(err);
                 }
-                console.log(output);
+                //console.log(output);
             });
             return results[0];
 
@@ -103,6 +103,6 @@ exports.set_one_quest_bool_finish = (id, quest_id) =>
         }).then(result =>
             resolve({ status: 200, message: '정상적으로 완료로 변경되었습니다.' , user_quest_table : g_user_quest_table })
         ).catch(err => {
-            console.log("err : " + err);
+            //console.log("err : " + err);
             reject({ status: 500, message: 'Internal Server Error !' })
         })});
