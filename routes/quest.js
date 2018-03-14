@@ -76,7 +76,7 @@ router.post('/create', (req, res) => {
             db.connectDB().then(
                 quest_info.get_one_quest(req.params.quest_id)
                     .then(result => {
-                        if(result.people_num >= 4){
+                        if(result.people_num >= 6){
                             res.status(501).json({message: '인원 초과', result : -1});
                         }else{
                             return quest_info.people_num_change(req.params.quest_id, 1);
