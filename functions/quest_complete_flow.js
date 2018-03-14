@@ -49,7 +49,7 @@ exports.complete_quest_init = (id,elder_id, quest_id) =>
                     return user.save();
                 }
             }).then(user => {
-                var link = 'http://52.79.41.31:3000/api/v1g1/senior/complete/' + id + '/' + elder_id + '/' + quest_id + '/'+ random;
+                var link = 'https://ssumon.com/api/v1g1/senior/complete/' + id + '/' + elder_id + '/' + quest_id + '/'+ random;
                 resolve({ status: 200, message: 'click link to finish quest', link : link });
             }).catch(err => {
                 console.log('err : ', err);

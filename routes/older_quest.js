@@ -56,10 +56,10 @@ const config = require('../config/config');
                         return user_quest_bool.set_one_quest_bool_finish(req.params.id, req.params.quest_id)
                     })
                     .then(result =>{
-                        res.redirect('http://ssumon.com/complete');
+                        res.redirect('https://ssumon.com/complete');
                     })
                     .catch(err => {
-                        res.redirect('http://ssumon.com/timeout');
+                        res.redirect('https://ssumon.com/timeout');
                     })
             );
         // } else {
