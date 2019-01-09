@@ -15,6 +15,6 @@ var userSchema = new Schema({
     temp_temp_random_string_time : String,
     temp_password : String,
     temp_password_time : String
-});
+},{ usePushEach: true });
 
 module.exports = userSchema;
